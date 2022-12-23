@@ -38,7 +38,7 @@ RUN /opt/bin/busybox wget -qO- "$(/opt/bin/busybox sed -Ene \
 WORKDIR /tmp
 
 COPY scripts/install_ninja.sh install_ninja.sh
-RUN /opt/bin/bash ninja.sh && \
+RUN /opt/bin/bash install_ninja.sh && \
   rm install_ninja.sh
 
 WORKDIR /app
