@@ -13,6 +13,7 @@ cd ./ninja
 git checkout release
 
 mkdir build/
+cd build
 cmake ..
 cmake --build .
 install -Dm0755 -t /opt/bin ./ninja
