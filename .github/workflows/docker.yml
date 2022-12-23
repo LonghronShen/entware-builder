@@ -63,8 +63,8 @@ jobs:
         id: repository_name
         with:
           script: |
-            return context.payload.repository
-              .replace(context.payload.repository_owner + '/', '')
+            return context.repository
+              .replace(context.repository_owner + '/', '')
           result-encoding: string
 
       - name: Build and export
@@ -130,8 +130,8 @@ jobs:
         id: repository_name
         with:
           script: |
-            return context.payload.repository
-              .replace(context.payload.repository_owner + '/', '')
+            return context.repository
+              .replace(context.repository_owner + '/', '')
           result-encoding: string
 
       - name: Checkout base
