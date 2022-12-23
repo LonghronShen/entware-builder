@@ -14,7 +14,7 @@ RUN mkdir -p /opt && chmod 600 /opt && \
 
 ENV PATH="/opt/bin:/opt/sbin:${PATH}"
 
-RUN opkg install --force-overwrite automake bash busybox \
+RUN opkg install --force-overwrite make automake bash busybox \
         cmake coreutils coreutils-chgrp coreutils-chown coreutils-install \
         diffutils gcc git git git-http htop icu \
         ldconfig libintl-full libopenssl libopenssl-conf \
@@ -35,11 +35,10 @@ RUN /opt/bin/busybox wget -qO- "$(/opt/bin/busybox sed -Ene \
   's|^src/gz[[:space:]]entware[[:space:]]https?([[:graph:]]+)|http\1/include/include.tar.gz|p' \
   /opt/etc/opkg.conf)" | /opt/bin/busybox tar x -vzC /opt/include
 
-RUN cd /opt/tmp && git clone https://github.com/ninja-build/ninja.git && \
-    cd ./ninja && \
-    git checkout release && \
-    CONFIG_SHELL=/opt/bin/bash python3 ./configure.py --bootstrap && \
-    install -Dm0755 -t /opt/bin ./ninja && \
-    cd /opt/tmp && rm -Rf /opt/tmp/ninja
+WORKDIR /tmp
+
+COPY scripts/install_ninja.sh install_ninja.sh
+RUN /opt/bin/bash ninja.sh && \
+  rm install_ninja.sh
 
 WORKDIR /app
