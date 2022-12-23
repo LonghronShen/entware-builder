@@ -12,6 +12,8 @@ RUN mkdir -p /opt && chmod 600 /opt && \
     echo "export PATH=/opt/bin:/opt/sbin:\$PATH" > /etc/profile && \
     source /etc/profile
 
+ENV PATH="/opt/bin:/opt/sbin:${PATH}"
+
 RUN opkg install --force-overwrite automake bash busybox \
         cmake coreutils coreutils-chgrp coreutils-chown coreutils-install \
         diffutils gcc git git git-http htop icu \
