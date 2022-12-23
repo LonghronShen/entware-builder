@@ -7,11 +7,12 @@ ENV SHA=${SHA}
 ENV ENTWARE_ARCH=${ENTWARE_ARCH}
 
 RUN mkdir -p /opt && chmod 600 /opt && \
-    cd /opt && wget https://bin.entware.net/${ENTWARE_ARCH}/installer/generic.sh && \
+    cd /opt && wget http://bin.entware.net/${ENTWARE_ARCH}/installer/generic.sh && \
     sh ./generic.sh && \
     echo "export PATH=/opt/bin:/opt/sbin:\$PATH" > /etc/profile && \
-    source /etc/profile && \
-    opkg install --force-overwrite automake bash busybox \
+    source /etc/profile
+
+RUN opkg install --force-overwrite automake bash busybox \
         cmake coreutils coreutils-chgrp coreutils-chown coreutils-install \
         diffutils gcc git git git-http htop icu \
         ldconfig libintl-full libopenssl libopenssl-conf \
