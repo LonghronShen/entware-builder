@@ -17,7 +17,7 @@ ENV PATH="/opt/bin:/opt/sbin:${PATH}"
 RUN opkg install --force-overwrite make automake bash busybox \
         cmake coreutils coreutils-chgrp coreutils-chown coreutils-install \
         diffutils gcc git git git-http htop icu \
-        ldconfig libintl-full libopenssl libopenssl-conf \
+        ldconfig ldd libintl-full libopenssl libopenssl-conf \
         libpcre2 libevent2-openssl libcurl libtool-bin \
         net-tools openssh-client-utils \
         openssh-keygen openssh-moduli openssh-sftp-client \
@@ -38,7 +38,10 @@ RUN /opt/bin/busybox wget -qO- "$(/opt/bin/busybox sed -Ene \
 WORKDIR /tmp
 
 COPY scripts/install_ninja.sh install_ninja.sh
+COPY scripts/liblinks.sh liblinks.sh
+
 RUN /opt/bin/bash install_ninja.sh && \
-  rm install_ninja.sh
+  /opt/bin/bash liblinks.sh /opt/lib && \
+  rm *.sh
 
 WORKDIR /app
