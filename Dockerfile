@@ -42,6 +42,7 @@ COPY scripts/liblinks.sh liblinks.sh
 
 RUN /opt/bin/bash install_ninja.sh && \
   /opt/bin/bash liblinks.sh /opt/lib && \
-  rm *.sh
+  rm *.sh && \
+  ldconfig && ldconfig -v
 
 WORKDIR /app
