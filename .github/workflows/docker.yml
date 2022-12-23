@@ -129,7 +129,7 @@ jobs:
         id: repository_name
         with:
           script: |
-            context.repo.repo
+            return context.repo.repo
           result-encoding: string
 
       - name: Checkout base
