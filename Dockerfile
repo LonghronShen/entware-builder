@@ -31,6 +31,8 @@ RUN opkg install --force-overwrite make automake bash busybox \
         boost-stacktrace boost-system boost-test boost-thread boost-timer \
         boost-type_erasure boost-wave boost-wserialization
 
+RUN opkg install libatomic || true
+
 RUN /opt/bin/busybox wget -qO- "$(/opt/bin/busybox sed -Ene \
   's|^src/gz[[:space:]]entware[[:space:]]https?([[:graph:]]+)|http\1/include/include.tar.gz|p' \
   /opt/etc/opkg.conf)" | /opt/bin/busybox tar x -vzC /opt/include
