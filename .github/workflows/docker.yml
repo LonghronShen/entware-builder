@@ -14,22 +14,22 @@ jobs:
       matrix:
         include:
           - arch: 386
-            name: x86
+            name: x86-k2.6
             entware_arch: x86-k2.6
           - arch: amd64
-            name: amd64
+            name: x64-k3.2
             entware_arch: x64-k3.2
           - arch: arm/v7
-            name: armv7
+            name: armv7sf-k3.2
             entware_arch: armv7sf-k3.2
           - arch: arm64/v8
-            name: arm64v8
+            name: aarch64-k3.10
             entware_arch: aarch64-k3.10
           - arch: mipsel
-            name: mipsel-mipselsf-k3.4
+            name: mipselsf-k3.4
             entware_arch: mipselsf-k3.4
           # - arch: mips
-          #   name: mips-mipssf-k3.4
+          #   name: mipssf-k3.4
           #   entware_arch: mipssf-k3.4
 
     steps:
