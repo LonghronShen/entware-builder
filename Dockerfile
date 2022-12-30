@@ -40,9 +40,11 @@ RUN /opt/bin/busybox wget -qO- "$(/opt/bin/busybox sed -Ene \
 WORKDIR /tmp
 
 COPY scripts/install_ninja.sh install_ninja.sh
+COPY scripts/install_nproc.sh install_nproc.sh
 COPY scripts/liblinks.sh liblinks.sh
 
 RUN /opt/bin/bash install_ninja.sh && \
+  /opt/bin/bash install_nproc.sh && \
   /opt/bin/bash liblinks.sh /opt/lib && \
   rm *.sh && \
   ldconfig && ldconfig -v
